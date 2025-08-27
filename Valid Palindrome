@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool checkpalindrome(int start, int end, string &s) {
+        // skip left non-alphanumeric
+        if (start < end && !isalnum(s[start])) {
+            return checkpalindrome(start + 1, end, s);
+        }
+        // skip right non-alphanumeric
+        if (start < end && !isalnum(s[end])) {
+            return checkpalindrome(start, end - 1, s);
+        }
+        // base case
+        if (start >= end) {
+            return true;
+        }
+        // compare after converting to lowercase
+        if (tolower(s[start]) != tolower(s[end])) {
+            return false;
+        }
+        return checkpalindrome(start + 1, end - 1, s);
+    }
+
+    bool isPalindrome(string s) {
+        return checkpalindrome(0, s.size() - 1, s);
+    }
+};
