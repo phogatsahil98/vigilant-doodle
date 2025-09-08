@@ -1,81 +1,68 @@
-#include <bits/stdc++.h>
+// ! Merge Sort 
+#include <iostream>
+#include <vector>
 using namespace std;
 
-// Merges two subarrays of arr[].
-// First subarray is arr[left..mid]
-// Second subarray is arr[mid+1..right]
-void merge(vector<int>& arr, int left, 
-                     int mid, int right){
-                         
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+void mergeArray(vector<int>& arr, int low, int mid, int high) {
+    vector<int> temp;
+    int left = low;
+    int right = mid + 1;
 
-    // Create temp vectors
-    vector<int> L(n1), R(n2);
-
-    // Copy data to temp vectors L[] and R[]
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
-
-    int i = 0, j = 0;
-    int k = left;
-
-    // Merge the temp vectors back 
-    // into arr[left..right]
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+    // Compare and merge
+    while (left <= mid && right <= high) {
+        if (arr[left] <= arr[right]) {
+            temp.push_back(arr[left]);
+            left++;
+        } else {
+            temp.push_back(arr[right]);
+            right++;
         }
-        else {
-            arr[k] = R[j];
-            j++;
-        }
-        k++;
     }
 
-    // Copy the remaining elements of L[], 
-    // if there are any
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
+    // Copy remaining left half
+    while (left <= mid) {
+        temp.push_back(arr[left]);
+        left++;
     }
 
-    // Copy the remaining elements of R[], 
-    // if there are any
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
+    // Copy remaining right half
+    while (right <= high) {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    // Copy sorted data back to original array
+    for (int i = low; i <= high; i++) {
+        arr[i] = temp[i - low];
     }
 }
 
-// begin is for left index and end is right index
-// of the sub-array of arr to be sorted
-void mergeSort(vector<int>& arr, int left, int right){
-    
-    if (left >= right)
-        return;
+void mergeSort(vector<int>& arr, int low, int high) {
+    if (low >= high) return;
 
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
+    int mid = (low + high) / 2;
+
+    mergeSort(arr, low, mid);      // left half
+    mergeSort(arr, mid + 1, high); // right half
+    mergeArray(arr, low, mid, high); // merge
 }
 
-// Driver code
-int main(){
-    
-    vector<int> arr = {38, 27, 43, 10};
-    int n = arr.size();
+int main() {
+    int count;
+    cout << "Enter number of elements: ";
+    cin >> count;
 
-    mergeSort(arr, 0, n - 1);
-    for (int i = 0; i < arr.size(); i++)
-        cout << arr[i] << " ";
-    cout << endl;
-    
+    vector<int> arr(count);
+    cout << "Enter elements: ";
+    for (int i = 0; i < count; i++) {
+        cin >> arr[i];
+    }
+
+    mergeSort(arr, 0, count - 1);
+
+    cout << "Sorted Array: ";
+    for (auto it : arr) {
+        cout << it << " ";
+    }
     return 0;
 }
