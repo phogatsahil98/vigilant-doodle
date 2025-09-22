@@ -141,6 +141,7 @@ int main(){
     return 0;
 }
 */
+/*
 //? My Second approach
 #include<iostream>
 #include<vector>
@@ -161,7 +162,7 @@ int main(){
         else if(arr[i] > secondLargest && arr[i] != largest){
             secondLargest = arr[i];
         }
-        
+
         // For Smallest Number
         if (arr[i] < smallest)
         {
@@ -181,3 +182,81 @@ int main(){
     cout<<"Second Largest : "<<secondLargest<<endl;
     return 0;
 }
+*/
+//! TO check if an array is sorted or not
+/*
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector<int> arr{2, 3, 4, 5, 6, 7};
+
+    // TO check if an array is sorted or not
+    for(int i = 0; i < arr.size(); i++){
+        if (arr[i+1] > arr[i] )
+        //* Mere iss code mein kuch flows h jo chatGPT ne shi kiye h
+        {
+            cout<<"Array is sorted";
+        }
+        else{
+            cout<<"Array is not sorted";
+        }
+    }
+    return 0;
+}
+*/
+//! Made by chatGPT
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> arr{2, 3, 4, 5, 6, 7};
+    bool isSorted = true;
+
+    for (int i = 0; i < arr.size() - 1; i++)
+    {
+        if (arr[i + 1] < arr[i])
+        { // agar koi bhi element chhota nikla
+            isSorted = false;
+            break; // ab aage check karne ki zarurat nahi
+        }
+    }
+
+    if (isSorted)
+    {
+        cout << "Array is sorted";
+    }
+    else
+    {
+        cout << "Array is not sorted";
+    }
+
+    return 0;
+}
+*/
+//! Chalo ab flows ko theek krte h
+/*
+#include<iostream>
+#include<vector>
+using namespace std;
+// Ek function bnate h jo check krega ki array sorted h ya nhi
+bool isSorted(vector<int> &nums){
+    for (int i = 0; i < nums.size()-1; i++)
+    {
+        if(nums[i+1] < nums[i]){
+            return false;
+            break;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    vector <int> nums{7, 1, 2, 3, 4, 5, 6, 7};
+    cout << (isSorted(nums) ? "True" : "False");
+}
+*/
