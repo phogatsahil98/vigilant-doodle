@@ -6,7 +6,8 @@
         "iterator": "cpp",
         "ostream": "cpp",
         "cmath": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "list": "cpp"
     },
     "cSpell.words": [
         "Arnav",
