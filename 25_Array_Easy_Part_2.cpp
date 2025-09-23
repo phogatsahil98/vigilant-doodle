@@ -296,6 +296,7 @@ int main()
 }
 */
 //! Humne Recursion seekha tha chalo ussi se implement krte hai
+/*
 #include<iostream>
 #include<vector>
 #include<algorithm>
@@ -318,11 +319,11 @@ int main(){
 
     // Step = 2 => Reverse First k Values
     reverse(v.begin() , v.begin()+k);
-    
+
     // Step = 3 => Reverse after k to the end;
     reverse(v.begin()+k, v.end());
 
-    // Output 
+    // Output
     cout<<"Right Shift by "<<k<<" elements : ";
     for(auto iter : v){
         cout<<iter<<" ";
@@ -336,7 +337,7 @@ int main(){
 
     // Step = 2 => Reverse till k Values;
     reverse(v1.begin(), v1.end()-k);
-    
+
     // Step = 3 => Reverse k Values to remove Redundancy;
     reverse(v1.end()-k , v1.end());
 
@@ -345,6 +346,122 @@ int main(){
         cout<<iter_1<<" ";
     }
     cout << endl;
-    
+
     return 0;
 }
+*/
+//! To take all zeros at the end
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> v{0, 2, 0, 9, 2, 3, 0, 9};
+    int n = v.size();
+
+    int j = 0; // Position to place next non-zero
+
+    // Step 1: Move all non-zeros to front
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i] != 0)
+        {
+            v[j] = v[i];
+            j++;
+        }
+    }
+
+    // Step 2: Fill remaining with 0s
+    for (int i = j; i < n; i++)
+    {
+        v[i] = 0;
+    }
+
+    // Print result
+    for (auto iter : v)
+    {
+        cout << iter << " ";
+    }
+    return 0;
+}
+*/
+//TODO : Implementing mySelf
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector<int> v{0, 9, 1, 0, 9, 2, 9, 0, 5, 6, 0};
+    int size = v.size();
+
+    int j = 0;
+    for (int i = 0; i < size; i++)
+    {
+        // Shifting non-zero Elements at left
+        if(v[i] != 0){
+            v[j] = v[i];
+            j++;
+        }
+    }
+
+    // Putting zeros to the end of the array 
+    for(int i = j ; i < size ; i++){
+        v[i] = 0;
+    }
+    
+    // Printing Whole Array
+    for(auto iter : v){
+        cout<<iter<<" ";
+    }
+    
+return 0;
+}
+
+//! Optimal 2 pointer approach
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> v{1, 0, 2, 3, 2, 0, 0, 4, 5, 1};
+    int n = v.size();
+
+    int j = -1;
+
+    // Step 1: Find first 0
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i] == 0)
+        {
+            j = i;
+            break;
+        }
+    }
+
+    // If no zero found, no rotation needed
+    if (j == -1)
+    {
+        for (auto x : v)
+            cout << x << " ";
+        return 0;
+    }
+
+    // Step 2: Move i ahead and swap non-zero with j
+    for (int i = j + 1; i < n; i++)
+    {
+        if (v[i] != 0)
+        {
+            swap(v[i], v[j]);
+            j++;
+        }
+    }
+
+    // Print result
+    for (auto x : v)
+        cout << x << " ";
+    return 0;
+}
+*/
