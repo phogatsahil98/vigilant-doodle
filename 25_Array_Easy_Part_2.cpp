@@ -388,6 +388,7 @@ int main()
 }
 */
 //TODO : Implementing mySelf
+/*
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -405,19 +406,19 @@ int main(){
         }
     }
 
-    // Putting zeros to the end of the array 
+    // Putting zeros to the end of the array
     for(int i = j ; i < size ; i++){
         v[i] = 0;
     }
-    
+
     // Printing Whole Array
     for(auto iter : v){
         cout<<iter<<" ";
     }
-    
+
 return 0;
 }
-
+*/
 //! Optimal 2 pointer approach
 /*
 #include <iostream>
@@ -465,3 +466,38 @@ int main()
     return 0;
 }
 */
+//! Removing Elements 
+#include<iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+    vector<int> v{1, 2, 3, 1, 2, 3, 1, 2};
+    int value;
+    cout << "Enter a Value to Remove its Repetition: ";
+    cin >> value;
+
+    int j = v.size();
+    int i = 0;
+    while (i < j)
+    {
+        if (v[i] == value)
+        {
+            v[i] = v[j - 1]; // swap with last element
+            j--;             // reduce size
+        }
+        else
+        {
+            i++; // only increment if no removal
+        }
+    }
+
+    // Printing Values
+    cout << "Values after removing " << value << " : ";
+    for (int k = 0; k < j; k++)
+    {
+        cout << v[k] << " ";
+    }
+
+    return 0;
+}
