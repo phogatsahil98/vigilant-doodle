@@ -306,19 +306,45 @@ int main(){
     cout<<"Enter the Value to rotate by : ";
     cin>>k;
 
-    //? Step = 1 => Reverse All Value;
+    // Original Array
+    for(auto org : v){
+        cout<<org<<" ";
+    }
+    cout<<endl;
+
+    //TODO: Will Swipe Elemets to the Right
+    // Step = 1 => Reverse All Value;
     reverse(v.begin(), v.end());
 
-    //? Step = 2 => Reverse First k Values
+    // Step = 2 => Reverse First k Values
     reverse(v.begin() , v.begin()+k);
     
-    //? Step = 3 => Reverse after k to the end;
+    // Step = 3 => Reverse after k to the end;
     reverse(v.begin()+k, v.end());
 
     // Output 
+    cout<<"Right Shift by "<<k<<" elements : ";
     for(auto iter : v){
         cout<<iter<<" ";
     }
+    cout<<endl;
 
+    vector<int> v1{1 ,2, 3, 4, 5, 6};
+    // TODO: Will Swipe the element to the left
+    //  Step = 1 => Reverse All Value;
+    reverse(v1.begin(), v1.end());
+
+    // Step = 2 => Reverse till k Values;
+    reverse(v1.begin(), v1.end()-k);
+    
+    // Step = 3 => Reverse k Values to remove Redundancy;
+    reverse(v1.end()-k , v1.end());
+
+    cout<<"Left Shift by "<<k<<" elements : ";
+    for(auto iter_1 : v1){
+        cout<<iter_1<<" ";
+    }
+    cout << endl;
+    
     return 0;
 }
