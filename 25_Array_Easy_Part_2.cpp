@@ -242,6 +242,7 @@ int main()
 }
 */
 //! Implementing above with function
+/*
 #include <iostream>
 using namespace std;
 
@@ -290,6 +291,34 @@ int main()
     rotate = rotate % size;
 
     rotateFunction(arr, size, rotate);
+
+    return 0;
+}
+*/
+//! Humne Recursion seekha tha chalo ussi se implement krte hai
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main(){
+    vector<int> v{1, 2, 3, 4, 5, 6};
+    int k;
+    cout<<"Enter the Value to rotate by : ";
+    cin>>k;
+
+    //? Step = 1 => Reverse All Value;
+    reverse(v.begin(), v.end());
+
+    //? Step = 2 => Reverse First k Values
+    reverse(v.begin() , v.begin()+k);
+    
+    //? Step = 3 => Reverse after k to the end;
+    reverse(v.begin()+k, v.end());
+
+    // Output 
+    for(auto iter : v){
+        cout<<iter<<" ";
+    }
 
     return 0;
 }
