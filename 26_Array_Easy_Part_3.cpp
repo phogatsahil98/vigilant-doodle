@@ -124,6 +124,7 @@ int main(){
 
 //! To find out the missing value between 1 To N
 //? Approach 1 : Using Sum
+/*
 #include<iostream>
 using namespace std;
 int main(){
@@ -140,6 +141,32 @@ int main(){
     int missingNumber = totalSum - actualSum;
 
     cout<<"The Missing Number is : "<<missingNumber;
- 
+
+    return 0;
+}
+*/
+//? Approach 2 : Using XOR Operator
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {1, 2, 4, 7, 5, 6, 3};
+    int XOR_1 = 0;
+    int XOR_2 = 0;
+
+    int size = sizeof(arr)/ sizeof(arr[0]) + 1;
+
+    // Doing XOR of all elements from 1 to size
+    for(int i = 1 ; i <= size; i++){
+        XOR_1 ^= i;
+    }
+
+    // Doing XOR of all array elements
+    for(auto iter : arr){
+        XOR_2 ^= iter;
+    }
+
+    int missingNumber = XOR_1 ^ XOR_2;
+    cout<<"Missing Number is : "<<missingNumber;
+
     return 0;
 }
