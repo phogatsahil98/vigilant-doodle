@@ -72,7 +72,8 @@ int main()
 }
 */
 
-//! Counting character hashing 
+//! Counting character hashing
+/*
 #include<iostream>
 #include<unordered_map>
 using namespace std;
@@ -91,7 +92,31 @@ int main(){
     {
         cout<<iter_1.first<<" -> "<<iter_1.second<<endl;
     }
+
+    return 0;
+}
+*/
+
+//! Using Array to find out the occurrence of character
+#include<iostream>
+using namespace std;
+int main(){
+    char arr[] = {'q', 'w', 'e', 'a', 's', 'd', 't', 'y', 'u', 'g', 'v', 'h', 'j', 'o', 'p', 'l', 'm'};
     
+    int freq[26] = {0};
+
+    for(auto iter : arr){
+        freq[iter - 'a']++;
+    }
+
+    // Print kr do bhai
+    for(int i = 0 ; i < 26; i++){
+        if (freq[i] > 0)
+        {
+            cout<<char(i + 'a')<<" -> "<<freq[i]<<endl;
+        }
+    }
+
     return 0;
 }
 
