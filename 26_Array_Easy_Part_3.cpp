@@ -72,4 +72,27 @@ int main()
 }
 */
 
+//! Counting character hashing 
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+int main(){
+    int arr[] = {'s', 'a', 's', 's', 's', 'z', 's', 'x', 'a', 's', 'q', 'w'};
+    int size = sizeof(arr)/ sizeof(arr[0]);
+
+    unordered_map<char , int> hash;
+
+    for(int i = 0 ; i < size; i++){
+        hash[arr[i]]++;
+    }
+
+    cout<<"Occurrence of Character are as follow : "<<endl;
+    for(auto iter_1 : hash)
+    {
+        cout<<iter_1.first<<" -> "<<iter_1.second<<endl;
+    }
+    
+    return 0;
+}
+
 //! To find out the missing value between 1 To N
