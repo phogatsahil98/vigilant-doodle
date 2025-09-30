@@ -98,11 +98,12 @@ int main(){
 */
 
 //! Using Array to find out the occurrence of character
+/*
 #include<iostream>
 using namespace std;
 int main(){
     char arr[] = {'q', 'w', 'e', 'a', 's', 'd', 't', 'y', 'u', 'g', 'v', 'h', 'j', 'o', 'p', 'l', 'm'};
-    
+
     int freq[26] = {0};
 
     for(auto iter : arr){
@@ -119,5 +120,26 @@ int main(){
 
     return 0;
 }
+*/
 
 //! To find out the missing value between 1 To N
+//? Approach 1 : Using Sum
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {1, 2, 6, 4, 5};
+    int size = sizeof(arr)/sizeof(arr[0])+1;
+
+    int totalSum = size*(size+1)/2;
+
+    int actualSum = 0;
+    for(auto iter : arr){
+        actualSum+=iter;
+    }
+
+    int missingNumber = totalSum - actualSum;
+
+    cout<<"The Missing Number is : "<<missingNumber;
+ 
+    return 0;
+}
