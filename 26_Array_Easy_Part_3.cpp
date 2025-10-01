@@ -174,6 +174,7 @@ int main(){
     }
 */
 //! To check the maximum occurrence of 1's  11567
+/*
 #include<iostream>
 using namespace std;
 int main()
@@ -192,12 +193,63 @@ int main()
             {
                 maxCount = count;
             }
-        }    
+        }
         else{
             count = 0;
         }
     }
     cout<<"Maximum Streak of 1's is : "<<maxCount;
+
+    return 0;
+}
+*/
+//! To find the number which appears Ones and other number which appears Twice
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int main()
+{
+    vector<int> number{1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 0, 9, 8, 7, 6};
+
+    unordered_map<int, int> freq;
+
+    // Count frequency of each number
+    for (int i = 0; i < number.size(); i++)
+    {
+        freq[number[i]]++;
+    }
+
+    vector<int> oneRepeat;
+    vector<int> twoRepeat;
+
+    // Categorize based on frequency
+    for (auto &pair : freq)
+    {
+        if (pair.second == 1)
+        {
+            oneRepeat.push_back(pair.first);
+        }
+        else if (pair.second == 2)
+        {
+            twoRepeat.push_back(pair.first);
+        }
+    }
+
+    cout << "Numbers which come only once: ";
+    for (auto iter : oneRepeat)
+    {
+        cout << iter << " ";
+    }
+    cout << endl;
+
+    cout << "Numbers which come exactly twice: ";
+    for (auto iter : twoRepeat)
+    {
+        cout << iter << " ";
+    }
+    cout << endl;
 
     return 0;
 }
