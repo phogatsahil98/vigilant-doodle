@@ -173,7 +173,7 @@ int main(){
     return 0;
     }
 */
-//! To check the maximum occurrence of 1's  11567
+//! To check the maximum occurrence of 1's  
 /*
 #include<iostream>
 using namespace std;
@@ -204,6 +204,7 @@ int main()
 }
 */
 //! To find the number which appears Ones and other number which appears Twice
+/*
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -250,6 +251,99 @@ int main()
         cout << iter << " ";
     }
     cout << endl;
+
+    return 0;
+}
+*/
+//? Now I Will Implement it
+/*
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+using namespace std;
+int main(){
+    vector<int> freq{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 4, 5, 6, 7, 8, 9, 0};
+
+    unordered_map<int , int> freqCheck;
+
+    for(int i = 0 ; i < freq.size(); i++){
+        freqCheck[freq[i]]++;
+    }
+
+    // If the Value are repeated only once
+    vector<int>oneTime;
+    for(auto iter : freqCheck){
+        if (iter.second == 1){
+            oneTime.push_back(iter.first);
+        }
+    }
+    // Printing Values that are repeated only 1 times
+    cout << "Values that are repeated only 1 times : ";
+    for (auto iter : oneTime)
+    {
+        cout<<iter<<" ";
+    }
+    cout<<endl;
+
+
+    vector<int>twoTime;
+    for(auto iter : freqCheck){
+        if(iter.second == 2){
+            twoTime.push_back(iter.first);
+        }
+    }
+    // Printing Values that are repeated for 2 times
+    cout << "Values that are repeated for 2 times : ";
+    for(auto iter : twoTime){
+        cout<<iter<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
+*/
+//! Using XOR Operator
+/*
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+    vector <int> numbers{2, 3, 4, 2, 4, 3 , 5};
+
+    int result = 0;
+    for(auto iter : numbers){
+        result = result ^ iter;
+    }
+
+    cout<<"The Single Number present is : "<<result;
+
+    return 0;
+}
+*/
+//! Longest Subarray with given Sum K(Positives)
+/*
+TODO : Example 1:
+*Input Format: N = 3, k = 5, array[] = {2,3,5}
+?Result: 2
+*Explanation: The longest subarray with sum 5 is {2, 3}. And its length is 2.
+*/
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int target = 10;
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int count = 0;
+    int currSum = 0;
+    for(int i = 0 ; i < size ; i++){
+        if (currSum == target)
+        {
+            cout<<"The Total Number of counts are : "<<count;
+            break;
+        }
+        currSum += arr[i];
+        count++;
+    }
 
     return 0;
 }
