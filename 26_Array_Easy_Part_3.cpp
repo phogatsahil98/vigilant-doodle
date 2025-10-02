@@ -326,6 +326,7 @@ TODO : Example 1:
 ?Result: 2
 *Explanation: The longest subarray with sum 5 is {2, 3}. And its length is 2.
 */
+/*
 #include<iostream>
 using namespace std;
 int main(){
@@ -344,6 +345,46 @@ int main(){
         currSum += arr[i];
         count++;
     }
+
+    return 0;
+}
+*/
+//! Sliding Window To find Longest Subarray with given sum 
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 10;
+
+    int left = 0, right = 0;
+    int sum = 0;
+    int maxLen = 0;
+
+    while (right < n)
+    {
+        sum += arr[right]; // include current element
+
+        // shrink window if sum > k
+        while (sum > k && left <= right)
+        {
+            sum -= arr[left];
+            left++;
+        }
+
+        // check if sum == k
+        if (sum == k)
+        {
+            maxLen = max(maxLen, right - left + 1);
+        }
+
+        right++;
+    }
+
+    cout << "Longest subarray length with sum " << k << " is: " << maxLen << endl;
 
     return 0;
 }
