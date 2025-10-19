@@ -93,14 +93,14 @@ int main()
 }
 */
 // Implementing Recursive Once again
-/*
+
 #include<iostream>
 using namespace std;
 int recursiveSearch(int *arr, int low_ , int high_ , int searchElement){
     int low = low_;
     int high = high_;
 
-    int mid = (low + high)/2;
+    int mid = low + (high - low) / 2;
 
     // Initial Condition
     if (low > high)
@@ -112,16 +112,13 @@ int recursiveSearch(int *arr, int low_ , int high_ , int searchElement){
         return mid;
     }
     else if (searchElement < arr[mid]){
-        recursiveSearch(arr, low , mid-1 , searchElement);
+        return recursiveSearch(arr, low , mid-1 , searchElement);
     }
-    else if (searchElement > arr[mid])
+    else //(searchElement > arr[mid])
     {
-        recursiveSearch(arr, mid+1 , high ,searchElement);
+        return recursiveSearch(arr, mid+1 , high ,searchElement);
     }
-    else{
-        return -1;
-    }
-};
+}
 
 int main(){
     int arr[] = {12, 24, 34, 47, 56, 69, 78, 82, 90};
@@ -137,10 +134,12 @@ int main(){
 
     if(searchValue != -1){
         cout<<"Element found at index : "<<searchValue<<endl;
-        cout<<"Element Found at "<<searchValue + 1<<" Place";
+        // If you want to show 1-based position, uncomment the next line:
+        // cout<<"Element Found at position (1-based): "<<searchValue + 1<<endl;
     }
     else{
-        cout<<"No Element Exist";
+        cout<<"Element does not exist";
     }
 }
-*/
+
+
