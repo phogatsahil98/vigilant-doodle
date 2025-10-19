@@ -350,6 +350,7 @@ int main(){
 }
 */
 //! Sliding Window To find Longest Subarray with given sum 
+/*
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -388,3 +389,49 @@ int main()
 
     return 0;
 }
+*/
+//! Implementing Sliding Window One more time
+/*
+#include<iostream>
+using namespace std;
+
+int targetSumLength(int *arr , int size ,int target){
+    int start = 0;
+    int currSum = 0;
+    int maxLength = 0;
+
+    for (int end = 0; end < size-1; end++) // yhh loop end ko last tak leke jayega
+    {
+        currSum += arr[end]; // yhh last tak ki sari value ko add krta jayega
+        // yhh chalega tab tak jab tak currentSum ki value se kam rahegi aur start end ko bypass nhi krega
+        while (currSum > target && start <= end)
+        {
+            // Maan lo aisa ho jata h tab
+            currSum -= arr[start]; // current Sum se start ki value hta do
+            start++; // start ko ek step aage kr do
+        }
+
+        // Ab hme length calculate krni h
+        if(currSum == target){
+            int windowLength = end - start + 1;
+            maxLength = max(maxLength , windowLength);
+        }
+    }
+    return maxLength;
+};
+
+int main()
+{
+    int arr[] = {10, 5, 3, 7, 4, 1, 9, 6};
+
+    int target;
+    cout<<"Enter a Target Sum to find out : ";
+    cin>>target;
+
+    int size= sizeof(arr)/sizeof(arr[0]);
+
+    int maxLength = targetSumLength(arr, size ,target);
+    cout<<"Maximum Length of target Sum : "<<maxLength;
+}
+*/
+//! Ab isi problem ko hum Prefix-Sum or Hashing ki help se karenge
