@@ -142,4 +142,42 @@ int main(){
     }
 }
 
+//! Implementing Lower Bound Algorithm
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[] = {3, 5, 8, 15, 19};
+    int target = 9;
+
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int low = 0;
+    int high = size - 1;
+    int ans = size; // default if no element >= target
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] >= target)
+        {
+            ans = mid;      // possible answer
+            high = mid - 1; // search left for smaller valid index
+        }
+        else
+        {
+            low = mid + 1; // search right
+        }
+    }
+
+    if (ans == size)
+        cout << "No element greater than or equal to target found.";
+    else
+        cout << "Lower Bound Index is : " << ans << " (Value: " << arr[ans] << ")";
+
+    return 0;
+}
+
+
 
