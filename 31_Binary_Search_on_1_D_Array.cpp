@@ -249,6 +249,7 @@ int main(){
 }
 */
 //! Floor & Ceil Values
+/*
 #include <iostream>
 using namespace std;
 
@@ -327,4 +328,38 @@ int main()
 
     return 0;
 }
-//! Last occurrence of a target element  
+*/
+//! Last occurrence of a target element
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {3, 4, 13, 13, 13, 20, 40};
+    int target = 13;
+
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int lowPointer = 0;
+    int highPointer = size-1;
+
+    // occurrence ko store kro 
+    int result = -1;
+    while (lowPointer <= highPointer)
+    {
+        // mid ko find out kro 
+        int mid = lowPointer + (highPointer - lowPointer) / 2;
+
+        // possibility h ki last element mid hi ho tab
+        if(arr[mid] ==  target){
+            result = mid;
+            lowPointer = mid + 1;
+        }
+        // ab maan lo ki center wala nhi h balki iske aage wala h tab
+        if(target < arr[mid]){
+            highPointer = mid - 1;
+        }
+        if(target > arr[mid]){
+            lowPointer = mid + 1;
+        }
+    }
+    cout<<"Last occurrence is at index : "<<result;
+}
