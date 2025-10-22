@@ -248,3 +248,82 @@ int main(){
     return 0;
 }
 */
+//! Floor & Ceil Values
+#include <iostream>
+using namespace std;
+
+// Ceil: Smallest element >= target
+int ceilValue(int *arr, int lowValue, int highValue, int targetValue)
+{
+    int low = lowValue;
+    int high = highValue;
+    int target = targetValue;
+    int ans = -1; // Initialize with -1 (not found)
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] >= target)
+        {
+            // This could be our ceil
+            ans = mid;
+            high = mid - 1; // Look for smaller index with same condition
+        }
+        else
+        {
+            low = mid + 1; // Need larger element
+        }
+    }
+    return ans; // Returns index, -1 if no ceil exists
+}
+
+// Floor: Largest element <= target
+int floorValue(int *arr, int lowValue, int highValue, int targetValue)
+{
+    int low = lowValue;
+    int high = highValue;
+    int target = targetValue;
+    int ans = -1; // Initialize with -1 (not found)
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid] <= target)
+        {
+            // This could be our floor
+            ans = mid;
+            low = mid + 1; // Look for larger index with same condition
+        }
+        else
+        {
+            high = mid - 1; // Need smaller element
+        }
+    }
+    return ans; // Returns index, -1 if no floor exists
+}
+
+int main()
+{
+    int arr[] = {3, 4, 4, 7, 8, 10};
+    int targetValue = 5;
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int ceilIdx = ceilValue(arr, 0, size - 1, targetValue);
+    int floorIdx = floorValue(arr, 0, size - 1, targetValue);
+
+    cout << "The ceil value for " << targetValue << " is : ";
+    if (ceilIdx != -1)
+        cout << arr[ceilIdx] << " at index " << ceilIdx << endl;
+    else
+        cout << "No ceil exists" << endl;
+
+    cout << "The floor value for " << targetValue << " is : ";
+    if (floorIdx != -1)
+        cout << arr[floorIdx] << " at index " << floorIdx << endl;
+    else
+        cout << "No floor exists" << endl;
+
+    return 0;
+}
