@@ -330,6 +330,7 @@ int main()
 }
 */
 //! Last occurrence of a target element
+/*
 #include<iostream>
 using namespace std;
 int main(){
@@ -341,11 +342,11 @@ int main(){
     int lowPointer = 0;
     int highPointer = size-1;
 
-    // occurrence ko store kro 
+    // occurrence ko store kro
     int result = -1;
     while (lowPointer <= highPointer)
     {
-        // mid ko find out kro 
+        // mid ko find out kro
         int mid = lowPointer + (highPointer - lowPointer) / 2;
 
         // possibility h ki last element mid hi ho tab
@@ -362,4 +363,79 @@ int main(){
         }
     }
     cout<<"Last occurrence is at index : "<<result;
+}
+*/
+//! Now to find first and last occurrence as well
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int firstFunction(vector<int> &arr, int size, int target) {
+    int low = 0;
+    int high = size - 1;
+
+    int result = -1;
+    while(low <= high){
+        // finding mid 
+        int mid = low + (high - low) / 2;
+        // assume our first occurred element is at mid then
+        if(arr[mid] == target){
+            result = mid;
+            high = mid - 1;
+        }
+        // maan lo target bda h tab
+        if(target > arr[mid]){
+            low = mid + 1;
+        }
+        // agr target chhota h tab
+        if(target < arr[mid]){
+            high = mid - 1;
+        }
+    }
+    return result;
+};
+
+int lastFunction(vector<int> &arr, int size,  int target){
+    int low = 0;
+    int high = size - 1;
+
+    int result = -1;
+    while (low <= high)
+    {
+        // finding mid
+        int mid = low + (high - low) / 2;
+        // assume our first occurred element is at mid then
+        if (arr[mid] == target)
+        {
+            result = mid;
+            low = mid + 1;
+        }
+        // maan lo target bda h tab
+        if (target > arr[mid])
+        {
+            low = mid + 1;
+        }
+        // agr target chhota h tab
+        if (target < arr[mid])
+        {
+            high = mid - 1;
+        }
+    }
+    return result;
+};
+
+int main(){
+    vector<int> arr{3, 4, 13, 13, 13, 20, 40};
+    int target = 13;
+
+    int size = arr.size();
+    // function to find out first occurrence 
+    int firstOccurrence = firstFunction(arr, size, target);
+
+    // function to find out last occurrence
+    int lastOccurrence = lastFunction(arr, size, target);
+
+    cout<<"First Occurrence at "<<firstOccurrence<<" and last occurrence at "<<lastOccurrence;
+
+    return 0;
 }
