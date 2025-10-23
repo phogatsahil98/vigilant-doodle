@@ -441,7 +441,8 @@ int main(){
     return 0;
 }
 */
-//! To find the occurrence of target number 
+//! To find the occurrence of target number
+/*
 #include<iostream>
 using namespace std;
 
@@ -508,7 +509,7 @@ int main(){
     int size = sizeof(nums)/sizeof(nums[0]);
 
     int firstOccurrence = first(nums , size, target);
-    int lastOccurrence = last(nums, size, target); 
+    int lastOccurrence = last(nums, size, target);
 
     if(firstOccurrence == -1){
         cout<<"No Element Found";
@@ -518,5 +519,89 @@ int main(){
         cout<<"Total Occurrences are : "<<totalOccurrence;
     }
 
+    return 0;
+}
+*/
+#include <iostream>
+using namespace std;
+
+int rotatedSortedArray(int *nums, int size, int target)
+{
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        // If target found at mid
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        // Check if left half is sorted
+        if (nums[low] <= nums[mid])
+        {
+            // Check if target is in left sorted half
+            if (nums[low] <= target && target < nums[mid])
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        // Right half is sorted
+        else
+        {
+            // Check if target is in right sorted half
+            if (nums[mid] < target && target <= nums[high])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    int nums[] = {4, 5, 6, 7, 0, 1, 2, 3};
+    int target = 0;
+    int size = sizeof(nums) / sizeof(nums[0]);
+
+    int result = rotatedSortedArray(nums, size, target);
+
+    if (result != -1)
+    {
+        cout << "Target " << target << " found at index: " << result << endl;
+    }
+    else
+    {
+        cout << "Target " << target << " not found" << endl;
+    }
+
+    //? Individual Test Cases :
+    // Test case 1: Target in left sorted part
+    int nums1[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl; 
+
+    // Test case 2: Target in right sorted part
+    int nums2[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl; 
+
+    // Test case 3: Target not found
+    int nums3[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 3: " << rotatedSortedArray(nums3, 7, 3) << endl;
+
+    // Test case 4: Single element
+    int nums4[] = {1};
+    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl; 
     return 0;
 }
