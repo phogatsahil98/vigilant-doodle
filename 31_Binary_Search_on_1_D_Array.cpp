@@ -365,6 +365,7 @@ int main(){
     cout<<"Last occurrence is at index : "<<result;
 }
 */
+/*
 //! Now to find first and last occurrence as well
 #include<iostream>
 #include<vector>
@@ -376,7 +377,7 @@ int firstFunction(vector<int> &arr, int size, int target) {
 
     int result = -1;
     while(low <= high){
-        // finding mid 
+        // finding mid
         int mid = low + (high - low) / 2;
         // assume our first occurred element is at mid then
         if(arr[mid] == target){
@@ -429,13 +430,93 @@ int main(){
     int target = 13;
 
     int size = arr.size();
-    // function to find out first occurrence 
+    // function to find out first occurrence
     int firstOccurrence = firstFunction(arr, size, target);
 
     // function to find out last occurrence
     int lastOccurrence = lastFunction(arr, size, target);
 
     cout<<"First Occurrence at "<<firstOccurrence<<" and last occurrence at "<<lastOccurrence;
+
+    return 0;
+}
+*/
+//! To find the occurrence of target number 
+#include<iostream>
+using namespace std;
+
+int first(int *nums ,int size, int target){
+    int low = 0;
+    int high = size - 1;
+
+    // created another variable to store our result
+    int result = -1;
+    while (low <= high)
+    {
+        // find mid first
+        int mid = low + (high - low) / 2;
+        // assume the mid is possibly our first index
+        if(nums[mid] == target){
+            result = mid;
+            high = mid - 1;
+        }
+        // if target is bigger than our mid
+        if(target > nums[mid]){
+            low = mid + 1;
+        }
+        // if target is less than mid
+        if(target < nums[mid]){
+            high = mid - 1;
+        }
+    }
+    return result;
+}
+
+int last(int *nums ,int size, int target){
+    int low = 0;
+    int high = size - 1;
+
+    // created another variable to store our result
+    int result = -1;
+    while (low <= high)
+    {
+        // find mid first
+        int mid = low + (high - low) / 2;
+        // assume the mid is possibly our first index
+        if (nums[mid] == target)
+        {
+            result = mid;
+            low = mid + 1;
+        }
+        // if target is bigger than our mid
+        if (target > nums[mid])
+        {
+            low = mid + 1;
+        }
+        // if target is less than mid
+        if (target < nums[mid])
+        {
+            high = mid - 1;
+        }
+    }
+    return result;
+}
+
+int main(){
+    int nums[] = {2, 2, 3, 3, 3, 3, 4};
+    int target = 1;
+    int size = sizeof(nums)/sizeof(nums[0]);
+
+    int firstOccurrence = first(nums , size, target);
+    int lastOccurrence = last(nums, size, target); 
+
+    if(firstOccurrence == -1){
+        cout<<"No Element Found";
+    }
+    else{
+        int totalOccurrence = (lastOccurrence - firstOccurrence) + 1 ;
+        cout<<"Total Occurrences are : "<<totalOccurrence;
+    }
 
     return 0;
 }
