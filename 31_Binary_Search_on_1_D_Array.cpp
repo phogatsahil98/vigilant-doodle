@@ -179,6 +179,40 @@ int main()
     return 0;
 }
 */
+//! Implementing Upper bound
+/*
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {2, 3, 7, 10, 11, 11, 25};
+    int target = 10;
+
+    int low = 0;
+    int size = sizeof(arr)/ sizeof(arr[0]);
+    int high = size - 1;
+
+    int ans = size;
+    while (low <= high)
+    {
+        int mid = low + (high - low)/ 2;
+        // maan lia arr[mid] > target so chances h ki yeh bda ho toh hum isse chhote ko search krenge toh hum high ko mid - 1 kr denge
+        if(arr[mid] > target){
+            ans = mid;
+            high = mid - 1;
+        }
+        else{
+            low = mid + 1;
+        }
+    }
+    if(ans != size){
+        cout<<"Upper Bound found at Index "<<ans;
+    }
+    else{
+        cout<<"No Upper Bound Exist";
+    }
+    return 0;
+}
+*/
 
 
 
