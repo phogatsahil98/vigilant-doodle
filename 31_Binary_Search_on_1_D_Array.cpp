@@ -213,6 +213,40 @@ int main(){
     return 0;
 }
 */
+//! Search Insert Position
+/*
+#include<iostream>
+using namespace std;
+int main(){
+    // int arr1[] = {1, 2, 4, 7};
+    int arr1[] = {1, 2, 4, 7};
+    int target1 = 8;
+    int size1 = sizeof(arr1)/ sizeof(arr1[0]);
+
+    int low = 0;
+    int high = size1 - 1;
+
+    int ans1 = size1;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+        if (arr1[mid] ==  target1){
+            cout<<"Element exist at "<<mid;
+            return mid;
+        }
+        else if (arr1[mid] >= target1){
+            ans1 = mid;
+            high = mid - 1;
+        }
+        else{
+            low = mid + 1;
+        }
+    }
+    cout<<"The Correct Position to fill is : "<<ans1;
+    return 0;
+}
+*/
 
 
 
