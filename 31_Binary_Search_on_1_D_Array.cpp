@@ -328,6 +328,282 @@ int main()
     return 0;
 }
 */
+//! Last occurrence of a target element
+/*
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {3, 4, 13, 13, 13, 20, 40};
+    int target = 13;
+
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int lowPointer = 0;
+    int highPointer = size-1;
+
+    // occurrence ko store kro
+    int result = -1;
+    while (lowPointer <= highPointer)
+    {
+        // mid ko find out kro
+        int mid = lowPointer + (highPointer - lowPointer) / 2;
+
+        // possibility h ki last element mid hi ho tab
+        if(arr[mid] ==  target){
+            result = mid;
+            lowPointer = mid + 1;
+        }
+        // ab maan lo ki center wala nhi h balki iske aage wala h tab
+        if(target < arr[mid]){
+            highPointer = mid - 1;
+        }
+        if(target > arr[mid]){
+            lowPointer = mid + 1;
+        }
+    }
+    cout<<"Last occurrence is at index : "<<result;
+}
+*/
+/*
+//! Now to find first and last occurrence as well
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int firstFunction(vector<int> &arr, int size, int target) {
+    int low = 0;
+    int high = size - 1;
+
+    int result = -1;
+    while(low <= high){
+        // finding mid
+        int mid = low + (high - low) / 2;
+        // assume our first occurred element is at mid then
+        if(arr[mid] == target){
+            result = mid;
+            high = mid - 1;
+        }
+        // maan lo target bda h tab
+        if(target > arr[mid]){
+            low = mid + 1;
+        }
+        // agr target chhota h tab
+        if(target < arr[mid]){
+            high = mid - 1;
+        }
+    }
+    return result;
+};
+
+int lastFunction(vector<int> &arr, int size,  int target){
+    int low = 0;
+    int high = size - 1;
+
+    int result = -1;
+    while (low <= high)
+    {
+        // finding mid
+        int mid = low + (high - low) / 2;
+        // assume our first occurred element is at mid then
+        if (arr[mid] == target)
+        {
+            result = mid;
+            low = mid + 1;
+        }
+        // maan lo target bda h tab
+        if (target > arr[mid])
+        {
+            low = mid + 1;
+        }
+        // agr target chhota h tab
+        if (target < arr[mid])
+        {
+            high = mid - 1;
+        }
+    }
+    return result;
+};
+
+int main(){
+    vector<int> arr{3, 4, 13, 13, 13, 20, 40};
+    int target = 13;
+
+    int size = arr.size();
+    // function to find out first occurrence
+    int firstOccurrence = firstFunction(arr, size, target);
+
+    // function to find out last occurrence
+    int lastOccurrence = lastFunction(arr, size, target);
+
+    cout<<"First Occurrence at "<<firstOccurrence<<" and last occurrence at "<<lastOccurrence;
+
+    return 0;
+}
+*/
+//! To find the occurrence of target number
+/*
+#include<iostream>
+using namespace std;
+
+int first(int *nums ,int size, int target){
+    int low = 0;
+    int high = size - 1;
+
+    // created another variable to store our result
+    int result = -1;
+    while (low <= high)
+    {
+        // find mid first
+        int mid = low + (high - low) / 2;
+        // assume the mid is possibly our first index
+        if(nums[mid] == target){
+            result = mid;
+            high = mid - 1;
+        }
+        // if target is bigger than our mid
+        if(target > nums[mid]){
+            low = mid + 1;
+        }
+        // if target is less than mid
+        if(target < nums[mid]){
+            high = mid - 1;
+        }
+    }
+    return result;
+}
+
+int last(int *nums ,int size, int target){
+    int low = 0;
+    int high = size - 1;
+
+    // created another variable to store our result
+    int result = -1;
+    while (low <= high)
+    {
+        // find mid first
+        int mid = low + (high - low) / 2;
+        // assume the mid is possibly our first index
+        if (nums[mid] == target)
+        {
+            result = mid;
+            low = mid + 1;
+        }
+        // if target is bigger than our mid
+        if (target > nums[mid])
+        {
+            low = mid + 1;
+        }
+        // if target is less than mid
+        if (target < nums[mid])
+        {
+            high = mid - 1;
+        }
+    }
+    return result;
+}
+
+int main(){
+    int nums[] = {2, 2, 3, 3, 3, 3, 4};
+    int target = 1;
+    int size = sizeof(nums)/sizeof(nums[0]);
+
+    int firstOccurrence = first(nums , size, target);
+    int lastOccurrence = last(nums, size, target);
+
+    if(firstOccurrence == -1){
+        cout<<"No Element Found";
+    }
+    else{
+        int totalOccurrence = (lastOccurrence - firstOccurrence) + 1 ;
+        cout<<"Total Occurrences are : "<<totalOccurrence;
+    }
+
+    return 0;
+}
+*/
+#include <iostream>
+using namespace std;
+
+int rotatedSortedArray(int *nums, int size, int target)
+{
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        // If target found at mid
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+
+        // Check if left half is sorted
+        if (nums[low] <= nums[mid])
+        {
+            // Check if target is in left sorted half
+            if (nums[low] <= target && target < nums[mid])
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        // Right half is sorted
+        else
+        {
+            // Check if target is in right sorted half
+            if (nums[mid] < target && target <= nums[high])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    int nums[] = {4, 5, 6, 7, 0, 1, 2, 3};
+    int target = 0;
+    int size = sizeof(nums) / sizeof(nums[0]);
+
+    int result = rotatedSortedArray(nums, size, target);
+
+    if (result != -1)
+    {
+        cout << "Target " << target << " found at index: " << result << endl;
+    }
+    else
+    {
+        cout << "Target " << target << " not found" << endl;
+    }
+
+    //? Individual Test Cases :
+    // Test case 1: Target in left sorted part
+    int nums1[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl; 
+
+    // Test case 2: Target in right sorted part
+    int nums2[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl; 
+
+    // Test case 3: Target not found
+    int nums3[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 3: " << rotatedSortedArray(nums3, 7, 3) << endl;
+
+    // Test case 4: Single element
+    int nums4[] = {1};
+    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl; 
+    return 0;
+}
 
 
 
