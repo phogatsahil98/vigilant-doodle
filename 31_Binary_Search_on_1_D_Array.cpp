@@ -521,6 +521,7 @@ int main(){
     return 0;
 }
 */
+/*
 #include <iostream>
 using namespace std;
 
@@ -604,7 +605,80 @@ int main()
     cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl; 
     return 0;
 }
+*/
+//? Repeating above code so i can revise above concept
+#include<iostream>
+using namespace std;
 
+int rotatedSortedArray(int *nums, int size, int target){
+    int low = 0;
+    int high = size - 1;
+    
+    while (low <= high)
+    {
+        // checking it's mid
+        int mid = low + (high - low) / 2;
+        // checking if the left half is sorted or not
+        // check kro khi hamara element mid wala hi na ho
+        if(nums[mid] == target){
+            return mid;
+        }
+        // will check if left part is sorted
+        if (nums[low] <= nums[mid])
+        {
+            // ab check kro kya hamara element yha exist krta h ya nhi 
+            if(nums[low] <= target && target < nums[mid]){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+            // check if right part is sorted or not
+        else{
+            // yha check kro ki hamara element khi right mein toh nhi h 
+            if(nums[mid] < target && target < nums[high]){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+    }   
+    return -1;
+} 
+
+int main(){
+    int nums[] = {4, 5, 6, 7, 0, 1, 2};
+    int target = 0;
+    
+    int size = sizeof(nums)/sizeof(nums[0]);
+
+    int response = rotatedSortedArray(nums, size, target);
+    if(response != -1){
+        cout<<"Target Found at Index "<<response<<endl;
+    }
+    else{
+        cout<<"No Element Exist of Targeted Value";
+    }
+
+    int nums1[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl;
+
+    // Test case 2: Target in right sorted part
+    int nums2[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl;
+
+    // Test case 3: Target not found
+    int nums3[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 3: " << rotatedSortedArray(nums3, 7, 3) << endl;
+
+    // Test case 4: Single element
+    int nums4[] = {1};
+    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl;
+
+    return 0;
+}
 
 
 
