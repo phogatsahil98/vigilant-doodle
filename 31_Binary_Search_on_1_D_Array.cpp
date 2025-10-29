@@ -607,6 +607,7 @@ int main()
 }
 */
 //? Repeating above code so i can revise above concept
+/*
 #include<iostream>
 using namespace std;
 
@@ -679,6 +680,50 @@ int main(){
 
     return 0;
 }
+*/
+//! Minimum in Rotated Sorted Array
+/*
+#include <iostream>
+using namespace std;
+
+int minimumInRotatedSortedArray(int arr[], int n)
+{
+int low = 0;
+int high = n - 1;
+
+while (low < high)
+{
+int mid = low + (high - low) / 2;
+
+// If mid element is greater than rightmost,
+// then minimum lies in the right half
+if (arr[mid] > arr[high])
+{
+low = mid + 1;
+}
+// Otherwise, it lies in the left half (including mid)
+else
+{
+high = mid;
+}
+}
+
+// At the end, low == high pointing to the smallest element
+return arr[low];
+}
+
+int main()
+{
+int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3, 4};
+int n = sizeof(arr) / sizeof(arr[0]);
+
+int smallest = minimumInRotatedSortedArray(arr, n);
+cout << "Smallest Element Present in the Array is : " << smallest << endl;
+
+return 0;
+}
+*/
+
 
 
 
