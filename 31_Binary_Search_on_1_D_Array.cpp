@@ -723,6 +723,174 @@ cout << "Smallest Element Present in the Array is : " << smallest << endl;
 return 0;
 }
 */
+/! To find peak Elements in an Array
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> findPeakElement(vector<int> &arr, int size)
+{
+vector<int> peaks; // 👈 New vector to store peaks safely
+
+// Case 1: Single element
+if (size == 1)
+{
+peaks.push_back(0);
+return peaks;
+}
+
+// Case 2: First element
+if (arr[0] >= arr[1])
+{
+peaks.push_back(0);
+}
+
+// Case 3: Last element
+if (arr[size - 1] >= arr[size - 2])
+{
+peaks.push_back(size - 1);
+}
+
+// Case 4: Elements in between
+int low = 1, high = size - 2;
+while (low <= high)
+{
+int mid = low + (high - low) / 2;
+
+// Peak condition
+if (arr[mid] >= arr[mid - 1] && arr[mid] >= arr[mid + 1])
+{
+peaks.push_back(mid);
+
+// Move both directions to find others
+if (arr[mid - 1] > arr[mid + 1])
+high = mid - 1;
+else
+low = mid + 1;
+}
+// If left side is greater → shift left
+else if (arr[mid - 1] > arr[mid])
+{
+high = mid - 1;
+}
+// Else shift right
+else
+{
+low = mid + 1;
+}
+}
+
+return peaks;
+}
+
+int main()
+{
+vector<int> arr = {1, 2, 1, 3, 5, 6, 4};
+int size = arr.size();
+
+// 👇 Function returns a new vector of peak indices
+vector<int> peaks = findPeakElement(arr, size);
+
+cout << "Peak indices: ";
+for (int i : peaks)
+{
+cout << i << " ";
+}
+cout << endl;
+
+return 0;
+}
+*/
+//! Two Sum problem again
+/*
+#include <iostream>
+using namespace std;
+
+int main()
+{
+int arr[] = {2, 3, 0, 5, 6, 7};
+int target = 9;
+
+int size = sizeof(arr) / sizeof(arr[0]);
+
+bool found = false; // to track if any pair was found
+
+for (int i = 0; i < size - 1; i++)
+{
+for (int j = i + 1; j < size; j++)
+{ // start from i+1 to avoid duplicates
+if (arr[i] + arr[j] == target)
+{
+cout << "Pair found at indices: " << i << " and " << j << endl;
+cout << "Values: " << arr[i] << " + " << arr[j] << " = " << target << endl;
+found = true;
+}
+}
+}
+
+if (!found)
+{
+cout << "No pair found with sum = " << target << endl;
+}
+
+return 0;
+}
+*/
+#include <iostream>
+#include <vector>
+#include <unordered_map> // For hash map
+using namespace std;
+
+vector<int> twoSum(vector<int> &nums, int target)
+{
+// Step 1: Create an unordered_map (HashMap)
+// Key → element value
+// Value → element index
+unordered_map<int, int> map;
+
+// Step 2: Traverse the array
+for (int i = 0; i < nums.size(); i++)
+{
+int current = nums[i];
+int complement = target - current; // number we need to find
+
+// Step 3: Check if the complement exists in map
+if (map.find(complement) != map.end())
+{
+// Found a pair -> return their indices
+return {map[complement], i};
+}
+
+// Step 4: Otherwise, store the current number with its index
+// (This will help future elements find their complement)
+map[current] = i;
+}
+
+// Step 5: If no pair found, return {-1, -1}
+return {-1, -1};
+}
+
+int main()
+{
+vector<int> nums = {2, 7, 11, 15};
+int target = 9;
+
+vector<int> result = twoSum(nums, target);
+
+if (result[0] != -1)
+{
+cout << "Pair found at indices: " << result[0] << " and " << result[1] << endl;
+cout << "Values: " << nums[result[0]] << " + " << nums[result[1]]
+<< " = " << target << endl;
+}
+else
+{
+cout << "No valid pair found!" << endl;
+}
+
+return 0;
+}
 
 
 
