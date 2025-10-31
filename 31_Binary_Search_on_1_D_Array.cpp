@@ -522,6 +522,8 @@ int main(){
     return 0;
 }
 */
+//! To check if the target is present in rotated Sorted Array 
+/*
 #include <iostream>
 using namespace std;
 
@@ -590,11 +592,11 @@ int main()
     //? Individual Test Cases :
     // Test case 1: Target in left sorted part
     int nums1[] = {4, 5, 6, 7, 0, 1, 2};
-    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl; 
+    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl;
 
     // Test case 2: Target in right sorted part
     int nums2[] = {4, 5, 6, 7, 0, 1, 2};
-    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl; 
+    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl;
 
     // Test case 3: Target not found
     int nums3[] = {4, 5, 6, 7, 0, 1, 2};
@@ -602,6 +604,297 @@ int main()
 
     // Test case 4: Single element
     int nums4[] = {1};
-    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl; 
+    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl;
+    return 0;
+}*/
+//? Repeating above code so i can revise above concept
+/*
+#include<iostream>
+using namespace std;
+
+int rotatedSortedArray(int *nums, int size, int target){
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high)
+    {
+        // checking it's mid
+        int mid = low + (high - low) / 2;
+        // checking if the left half is sorted or not
+        // check kro khi hamara element mid wala hi na ho
+        if(nums[mid] == target){
+            return mid;
+        }
+        // will check if left part is sorted
+        if (nums[low] <= nums[mid])
+        {
+            // ab check kro kya hamara element yha exist krta h ya nhi
+            if(nums[low] <= target && target < nums[mid]){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+            // check if right part is sorted or not
+        else{
+            // yha check kro ki hamara element khi right mein toh nhi h
+            if(nums[mid] < target && target < nums[high]){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+
+int main(){
+    int nums[] = {4, 5, 6, 7, 0, 1, 2};
+    int target = 0;
+
+    int size = sizeof(nums)/sizeof(nums[0]);
+
+    int response = rotatedSortedArray(nums, size, target);
+    if(response != -1){
+        cout<<"Target Found at Index "<<response<<endl;
+    }
+    else{
+        cout<<"No Element Exist of Targeted Value";
+    }
+
+    int nums1[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 1: " << rotatedSortedArray(nums1, 7, 5) << endl;
+
+    // Test case 2: Target in right sorted part
+    int nums2[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 2: " << rotatedSortedArray(nums2, 7, 1) << endl;
+
+    // Test case 3: Target not found
+    int nums3[] = {4, 5, 6, 7, 0, 1, 2};
+    cout << "Test 3: " << rotatedSortedArray(nums3, 7, 3) << endl;
+
+    // Test case 4: Single element
+    int nums4[] = {1};
+    cout << "Test 4: " << rotatedSortedArray(nums4, 1, 1) << endl;
+
     return 0;
 }
+*/
+//! search for a target element in a rotated sorted array.
+/*
+int arr = [ 7, 8, 1, 2, 3, 3, 3, 4, 5, 6 ];
+int target = 3;
+*/
+
+//! Minimum in Rotated Sorted Array
+/*
+#include <iostream>
+using namespace std;
+
+int minimumInRotatedSortedArray(int arr[], int n)
+{
+    int low = 0;
+    int high = n - 1;
+
+    while (low < high)
+    {
+        int mid = low + (high - low) / 2;
+
+        // If mid element is greater than rightmost,
+        // then minimum lies in the right half
+        if (arr[mid] > arr[high])
+        {
+            low = mid + 1;
+        }
+        // Otherwise, it lies in the left half (including mid)
+        else
+        {
+            high = mid;
+        }
+    }
+
+    // At the end, low == high pointing to the smallest element
+    return arr[low];
+}
+
+int main()
+{
+    int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int smallest = minimumInRotatedSortedArray(arr, n);
+    cout << "Smallest Element Present in the Array is : " << smallest << endl;
+
+    return 0;
+}
+*/
+
+//! TO find out how many times an array has been rotated
+/*
+#include<iostream>
+#include<climits>
+using namespace std;
+int timesArrayRotated(int * arr, int size_){
+    int size = size_;
+    int answer = INT_MAX;
+    // int index = -1;
+    int low = 0;
+    int high = size - 1;
+
+    while (low < high)
+    {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] > arr[high])
+        {
+            low = mid + 1;
+        }
+        else{
+            high = mid;
+        }
+    }
+    return low;
+}
+
+int main()
+{
+    int arr[] = {6, 7, 8, 9, 1, 2, 3};
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int rotation = timesArrayRotated(arr, size);
+    if(rotation <= 0){
+        cout<<"Array has not been Rotated";
+    }
+    else{
+        cout<<"Array has been Rotated "<<rotation<<" Times";
+    }
+}
+*/
+//!To find out Single Common Element present in an array
+//?-> Using XOR Operator
+/*
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6};
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int ans = 0;
+    for(int i = 0; i < size; i++){
+        ans = ans ^ arr[i];
+    }
+
+    cout<<"Single Common Element present is : "<<ans;
+}
+*/
+//! To find Peak Elements in an array
+/*
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
+    int size = sizeof(arr)/sizeof(arr[0]);
+
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+        // hamara element mil gya
+        if(low == high){
+            cout<<"The Maximum Element is at index : "<<low;
+            break;
+        }
+        if(arr[mid] > arr[mid + 1]){
+            // possible chances h ki maximum element right mein ho
+            high = mid;
+        }
+        else{
+            low = mid + 1;
+        }
+    }
+
+    return 0;
+}
+*/
+//! To find peak Elements in an Array
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> findPeakElement(vector<int> &arr, int size)
+{
+    vector<int> peaks; // 👈 New vector to store peaks safely
+
+    // Case 1: Single element
+    if (size == 1)
+    {
+        peaks.push_back(0);
+        return peaks;
+    }
+
+    // Case 2: First element
+    if (arr[0] >= arr[1])
+    {
+        peaks.push_back(0);
+    }
+
+    // Case 3: Last element
+    if (arr[size - 1] >= arr[size - 2])
+    {
+        peaks.push_back(size - 1);
+    }
+
+    // Case 4: Elements in between
+    int low = 1, high = size - 2;
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        // Peak condition
+        if (arr[mid] >= arr[mid - 1] && arr[mid] >= arr[mid + 1])
+        {
+            peaks.push_back(mid);
+
+            // Move both directions to find others
+            if (arr[mid - 1] > arr[mid + 1])
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        // If left side is greater → shift left
+        else if (arr[mid - 1] > arr[mid])
+        {
+            high = mid - 1;
+        }
+        // Else shift right
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+    return peaks;
+}
+
+int main()
+{
+    vector<int> arr = {1, 2, 1, 3, 5, 6, 4};
+    int size = arr.size();
+
+    // 👇 Function returns a new vector of peak indices
+    vector<int> peaks = findPeakElement(arr, size);
+
+    cout << "Peak indices: ";
+    for (int i : peaks)
+    {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+*/
