@@ -155,21 +155,21 @@ int main()
 }
 */
 //! Remove Duplicates from the array
+/*
+
 #include<iostream>
 #include <vector>
-#include <algorithm> 
+#include <algorithm>
 using namespace std;
 int main()
 {
     vector<int> arr{1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7};
-
     int size = arr.size();
 
     if (size == 0)
     {
         return 0;
     }
-
     int i = 0;
 
     for (int j = 1; j < size; j++)
@@ -180,16 +180,145 @@ int main()
             arr[i] = arr[j];
         }
     }
-
     arr.resize(i + 1);
-
+    
     cout << "Unique elements: ";
-
     for (int element : arr)
     {
         cout << element << " ";
     }
     cout << endl;
-    
+
+    return 0;
+}*/
+//! To find Majority array - Most repeated number
+/*
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+#include<climits>
+#include<algorithm>
+using namespace std;
+int main(){
+    vector<int> arr{2, 3, 4, 3, 2, 1, 4, 1, 2, 3};
+
+    // using hashmap to find out the repetition of keys
+    unordered_map<int, int> mpp;
+    // storing the repetition of numbers
+    for(auto iter : arr){
+        mpp[iter]++;  //* will store the repeated vales
+    }
+
+    //to check most repeated value
+    int maxCountValue = INT_MIN;
+    int maxCountKey = 0;
+
+    for(const auto &iter : mpp){
+        if (iter.second >= maxCountValue)
+        {
+            maxCountValue = iter.second;
+            maxCountKey = iter.first;
+        }
+    }
+
+    cout<<"Most repeated Value "<< maxCountKey << " occurred " << maxCountValue << " times" << endl;
+
+    return 0;
+}
+*/
+//! Code snippet given by Google
+/*
+#include <iostream>
+#include <unordered_map>
+#include <algorithm>
+using namespace std;
+
+// Function to find the key with the maximum value (count)
+int findMostRepeatedKey(const unordered_map<int, int> &umm)
+{
+    if (umm.empty())
+    {
+        // Handle the case where the map is empty
+        throw runtime_error("Map is empty.");
+    }
+
+    // Initialize variables to track the maximum
+    // 'best_key' will store the key with the highest count
+    int best_key = umm.begin()->first;
+    // 'max_count' will store the highest count found so far
+    int max_count = umm.begin()->second;
+
+    // Iterate through all key-value pairs in the map
+    for (const auto &pair : umm)
+    {
+        // 'pair.first' is the key
+        // 'pair.second' is the count
+        if (pair.second > max_count)
+        {
+            max_count = pair.second;
+            best_key = pair.first;
+        }
+    }
+    return best_key;
+}
+
+// Example usage:
+int main()
+{
+    unordered_map<int, int> frequencies = {
+        {1, 5},  // Key 1 appears 5 times
+        {2, 10}, // Key 2 appears 10 times
+        {3, 3}   // Key 3 appears 3 times
+    };
+
+    try
+    {
+        int most_repeated = findMostRepeatedKey(frequencies);
+        cout << "The most repeated key is: " << most_repeated << endl; // Output: 2
+    }
+    catch (const runtime_error &e)
+    {
+        cerr << e.what() << endl;
+    }
+
+    return 0;
+}
+*/
+//! To reverse an array
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// reverse elements in arr between indices start and end (inclusive)
+void reverseSubarray(vector<int> &arr, int start, int end){
+    while (start < end) {
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
+    }
+} 
+
+int main()
+{
+    vector<int> arr{1, 2, 3, 4, 5, 6, 7};
+    int k = 3;
+
+    //Printing Original Array First
+    cout<<"Original Array : ";
+    for(auto iter : arr){
+        cout<<iter<<" ";
+    }
+    cout<<endl;
+
+    // core logic to reverse first k elements to the right Side(example)
+    reverseSubarray(arr, 0, arr.size());
+    reverseSubarray(arr, 0 , k);
+    reverseSubarray(arr, k, arr.size());
+
+    // print result
+    for (int v : arr) {
+        cout << v << " ";
+    }
+    cout << endl;
     return 0;
 }
